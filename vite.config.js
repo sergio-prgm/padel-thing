@@ -6,9 +6,7 @@ export default defineConfig({
   plugins: [
     solid({
       ssr: false,
+      adapter: vercel()
     }),
-    vercel({
-      edge: true
-    })
   ],
 });
