@@ -1,7 +1,6 @@
 [build]
 command = "solid-start build"
-# functions = "netlify/functions"
-# publish = "netlify"
+publish = "dist"
 
 [[redirects]]
 from = "/*"
