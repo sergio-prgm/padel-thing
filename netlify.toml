@@ -1,0 +1,9 @@
+[build]
+command = "solid-start build"
+functions = "netlify/functions"
+publish = "netlify"
+
+[[redirects]]
+from = "/*"
+to = "/index.html"
+status = 200
