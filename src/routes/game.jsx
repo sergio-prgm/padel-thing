@@ -27,6 +27,7 @@ function Score({ teams }) {
   const [scoreA, setScoreA] = createSignal(0)
   const [scoreB, setScoreB] = createSignal(0)
   const [result, setResult] = createSignal([0, 0])
+  const [isServing, setIsServing] = createSignal(false)
 
   const tennisTranslate = (valueA, valueB) => {
     if (valueA === valueB && valueA >= 3) {
@@ -51,22 +52,26 @@ function Score({ teams }) {
       setScoreA(0)
       setScoreB(0)
       setResult([result()[0] + 1, result()[1]])
+      setIsServing(!isServing())
       console.log("Player A won!!")
     } else if (scoreB() - scoreA() >= 2 && scoreA() >= 3) {
       setScoreA(0)
       setScoreB(0)
       setResult([result()[0], result()[1] + 1])
+      setIsServing(!isServing())
       console.log("Player B won!!")
     }
     if (scoreA() === 4 && scoreB() <= 2) {
       setScoreA(0)
       setScoreB(0)
       setResult([result()[0] + 1, result()[1]])
+      setIsServing(!isServing())
       console.log("Player A won!!")
     } else if (scoreB() === 4 && scoreA() <= 2) {
       setScoreA(0)
       setScoreB(0)
       setResult([result()[0], result()[1] + 1])
+      setIsServing(!isServing())
       console.log("Player B won!!")
     }
   })
@@ -79,8 +84,8 @@ function Score({ teams }) {
         ))}</div>
 
       <div class="flex mx-auto w-fit gap-6">
-        <Btn handler={handleClickA}>{teamA || 'Team A'}</Btn>
-        <Btn handler={handleClickB}>{teamB || 'Team B'}</Btn>
+        <Btn handler={handleClickA}>{teamA || 'Team A'} {isServing() === false && '*'}</Btn>
+        <Btn handler={handleClickB}>{teamB || 'Team B'} {isServing() === true && '*'}</Btn>
       </div>
 
       <div class="block font-bold text-4xl mt-6 font-mono" >{tennisTranslate(scoreA(), scoreB())}</div>
