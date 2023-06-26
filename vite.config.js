@@ -8,7 +8,7 @@ export default defineConfig({
       ssr: false,
     }),
     vercel({
-      edge: false
+      edge: true
     })
   ],
 });
