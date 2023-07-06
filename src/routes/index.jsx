@@ -2,19 +2,23 @@ import { A } from "@solidjs/router";
 import { createSignal } from "solid-js";
 
 export default function Home() {
-  const [teamA, setTeamA] = createSignal("")
-  const [teamB, setTeamB] = createSignal("")
+  const [teamA, setTeamA] = createSignal([])
+  const [teamB, setTeamB] = createSignal([])
 
   const searchP = () => {
-    return `/game?teams=${teamA()}+${teamB()}`
+    const TA = teamA().map(player => player.replaceAll(" ", "_")).join("--")
+    const TB = teamB().map(player => player.replaceAll(" ", "_")).join("--")
+    console.log(TA)
+    console.log(TB)
+    return `/game?teams=${encodeURIComponent(TA)}+${encodeURIComponent(TB)}`
   }
 
   const teamAHandler = (e) => {
-    setTeamA(e.target.value)
+    setTeamA(ta => [...ta, e.target.value])
   }
 
   const teamBHandler = (e) => {
-    setTeamB(e.target.value)
+    setTeamB(tb => [...tb, e.target.value])
   }
 
   return (
@@ -25,8 +29,10 @@ export default function Home() {
       <form class="max-w-sm mx-auto">
         <label class="block mb-8 text-xl font-semibold leading-10"> Equipo A
           <input onchange={teamAHandler} class="border font-medium block w-full border-gray-500 px-4 py-2 focus:ring-gray-600 focus:ring-1 focus:outline-none " />
+          <input onchange={teamAHandler} class="border font-medium block w-full border-gray-500 px-4 py-2 focus:ring-gray-600 focus:ring-1 focus:outline-none " />
         </label>
         <label class="block mb-8 text-xl font-semibold leading-10"> Equipo B
+          <input onchange={teamBHandler} class="border font-medium block w-full border-gray-500 px-4 py-2 focus:ring-gray-600 focus:ring-1 focus:outline-none " />
           <input onchange={teamBHandler} class="border font-medium block w-full border-gray-500 px-4 py-2 focus:ring-gray-600 focus:ring-1 focus:outline-none " />
         </label>
         {/* <A class="font-bold border-2 px-4 py-2 border-blue-500 hover:bg-blue-100 text-2xl">Start Game</A> */}
