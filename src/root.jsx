@@ -33,7 +33,10 @@ export default function Root() {
             <nav class="bg-blue-800">
               <ul class="container flex items-center p-3 text-blue-200">
                 <li class={`border-b-2 ${active("/")} mx-1.5 sm:mx-6`}>
-                  <A href="/">Home</A>
+                  <A  href="/">Home</A>
+                </li>
+                <li class={`border-b-2 border-transparent hover:border-blue-600 mx-1.5 sm:mx-6`}>
+                  <A  href="/game?teams=A--B+C--D">Quick Launch</A>
                 </li>
               </ul>
             </nav>
